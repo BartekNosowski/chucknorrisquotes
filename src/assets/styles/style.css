@@ -1,0 +1,62 @@
+html * {
+    font-family: Reckless;
+}
+
+.font-color-white {
+    color: #d7e7e3;
+}
+
+body {
+    min-width: 360px;
+    height: 100%;
+    width: 100%;
+    background-image: url("https://fthmb.tqn.com/psdgyhKm3-TXfPuEhpraYiWxNJU=/3364x2242/filters:fill(auto,1)/GettyImages-93453966-59684e1d3df78c57f49b0c91.jpg");
+}
+
+.header {
+    font-size: 90px;
+    color: #d7e7e3;
+}
+
+.game-rules {
+    background: #1e0302;
+    font-size: 70px;
+    color: #d7e7e3;
+}
+
+.text-styling {
+    font-size: 40px;
+    color: #d7e7e3;
+    text-align: center;
+}
+.text-styling-modal {
+    font-size: 40px;
+    color: #120101;
+    text-align: center;
+}
+
+.button-special-lower {
+    height: 50px;
+    width: 90px;
+    border-color: #d7e7e3;
+    border-radius: 5px;
+    color: black;
+    background: #8d433e;
+    font-size: 30px;
+}
+
+.button-special-higher {
+    height: 50px;
+    width: 90px;
+    border-color: #d7e7e3;
+    border-radius: 5px;
+    color: black;
+    background: #006130;
+    font-size: 30px;
+}
+
+@media (min-width: 992px){
+    .modal-dialog {
+        max-width: 90vw;
+    }
+}
