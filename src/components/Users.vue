@@ -1,17 +1,17 @@
 <template>
-  <div class="container dices">
+  <div class="container bg-dark border dices">
     <div class="header">The Dice Game</div>
     <button type="button" class="btn border game-rules" data-toggle="modal" data-target="#exampleModalCenter">Game rules</button>
 
     <div class="text-styling">Roll types:</div>
     <span></span>
     <div class="row" style="justify-content: center">
-    <button @click="roundChange()" class="button-special-lower m-1">Lower</button>
+    <button @click="dicing()" class="button-special-lower m-1">Lower</button>
     <button @click="roundChange()" class="button-special-higher m-1">Higher</button>
     <button @click="pointsEarned()" class="button-special-higher m-1">+</button>
     </div>
-    <span class="text-styling">{{ dices.dice }}</span>
-    <img src={{img}}/>
+    <span class="text-styling">{{ dices.dice[0].value }}</span>
+    <img v-bind:src="img"/>
     <div class="container row">
       <div class="col-6">
       <span class="text-styling">Current round:{{whichRound}} / 30</span>
@@ -74,6 +74,16 @@ export default {
     }
   },
   methods: {
+
+    dicing() {
+
+      axios.get('http://roll.diceapi.com/json/d6')
+          .then(res => {
+            this.dices = res.data;
+            this.img = "http://roll.diceapi.com/images/poorly-drawn/d6/"+res.data.dice[0].value+".png";
+            console.log(res.data.dice[0].value)
+          })
+    },
     roundChange() {
       this.whichRound++;
       if (this.whichRound === 31){
@@ -87,22 +97,27 @@ export default {
         this.howManyPoints = 0
         return alert("Maximum of points - congratulations!")
       }
+    },
+    saveGame(){
+      localStorage.whichRound = this.whichRound;
+      localStorage.howManyPoints = this.howManyPoints;
+    },
+
+    loadGame(){
+      if(localStorage.whichRound != null && localStorage.howManyPoints != null){
+        this.whichRound = localStorage.whichRound
+        this.howManyPoints = localStorage.howManyPoints
+      }
+
     }
+
+
   },
   created: function () {
-    axios.get('http://roll.diceapi.com/json/d6')
-        .then(res => {
-          this.dices = res.data;
-        })
-        .then(ress => {
-          this.value = ress;
-        }),
-        function () {
-          axios.get('http://roll.diceapi.com/html/d6')
-              .then(res => {
-                this.img = res.data;
-              })
-        }
+   this.loadGame();
+   this.dicing();
+
+
   }
 }
 </script>
