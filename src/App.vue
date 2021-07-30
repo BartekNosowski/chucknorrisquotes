@@ -1,14 +1,14 @@
 <template>
-  <Users/>
+  <DiceRoll/>
 </template>
 
 <script>
-import Users from './components/Users.vue'
+import DiceRoll from './components/DiceRoll.vue'
 
 export default {
   name: 'App',
   components: {
-    Users
+    DiceRoll
   }
 }
 </script>

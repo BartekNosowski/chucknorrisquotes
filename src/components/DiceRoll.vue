@@ -6,15 +6,15 @@
     <div class="text-styling">Roll types:</div>
     <span></span>
     <div class="row" style="justify-content: center">
-    <button @click="dicing()" class="button-special-lower m-1">Lower</button>
-    <button @click="roundChange()" class="button-special-higher m-1">Higher</button>
-    <button @click="pointsEarned()" class="button-special-higher m-1">+</button>
+    <button @click="dicing(false)" class="button-special-lower m-1">Lower</button>
+    <button @click="dicing(true)" class="button-special-higher m-1">Higher</button>
+<!--    <button @click="pointsEarned()" class="button-special-higher m-1">+</button>-->
     </div>
-    <span class="text-styling">{{ dices.dice[0].value }}</span>
+    <span v-if="dices" class="text-styling">{{ dices.dice[0].value }}</span>
     <img v-bind:src="img"/>
     <div class="container row">
       <div class="col-6">
-      <span class="text-styling">Current round:{{whichRound}} / 30</span>
+      <span class="text-styling">Current round: {{whichRound}} / 30</span>
       </div>
       <div class="col-6">
         <span class="text-styling">Points earned: {{parseFloat(howManyPoints).toFixed(1)}} / 3</span>
@@ -75,14 +75,27 @@ export default {
   },
   methods: {
 
-    dicing() {
-
+    firstDice(){
       axios.get('http://roll.diceapi.com/json/d6')
           .then(res => {
             this.dices = res.data;
             this.img = "http://roll.diceapi.com/images/poorly-drawn/d6/"+res.data.dice[0].value+".png";
-            console.log(res.data.dice[0].value)
+
           })
+    },
+    dicing(greather) {
+      axios.get('http://roll.diceapi.com/json/d6')
+          .then(res => {
+            this.checkDice(res.data.dice[0].value,greather)
+            this.dices = res.data;
+            this.img = "http://roll.diceapi.com/images/poorly-drawn/d6/"+res.data.dice[0].value+".png";
+            console.log(res.data.dice[0].value)
+
+            this.roundChange()
+          })
+
+
+
     },
     roundChange() {
       this.whichRound++;
@@ -91,8 +104,24 @@ export default {
         return alert("Round 30 was last check your score.")
       }
     },
+    checkDice(newValue,greather){
+
+      if(greather){
+
+        if (newValue > this.dices.dice[0].value){
+          this.pointsEarned()
+        }
+      }else{
+        if (newValue < this.dices.dice[0].value){
+          this.pointsEarned()
+        }
+      }
+
+
+    },
     pointsEarned() {
       this.howManyPoints+=0.1;
+      console.log(this.howManyPoints)
       if (this.howManyPoints >= 3.1){
         this.howManyPoints = 0
         return alert("Maximum of points - congratulations!")
@@ -115,29 +144,10 @@ export default {
   },
   created: function () {
    this.loadGame();
-   this.dicing();
-
-
-  }
+   this.firstDice();
+  },
 }
 </script>
 
 <style scoped>
-
 </style>
-
-<!--  <table class="table">-->
-<!--    <thead>-->
-<!--    <tr>-->
-<!--      <th scope="col">Values</th>-->
-<!--      <th scope="col">Types</th>-->
-<!--    </tr>-->
-<!--    </thead>-->
-<!--    <tbody>-->
-<!--    <tr v-for="dice in dices" v-bind:key="dice">-->
-<!--&lt;!&ndash;      <th scope="row">{{dice.value}}</th>&ndash;&gt;-->
-<!--      <td>{{ dices.dice }}</td>-->
-<!--      <td>{{ dices.dice }}</td>-->
-<!--    </tr>-->
-<!--    </tbody>-->
-<!--  </table>-->
