@@ -1,14 +1,14 @@
 <template>
-  <DiceRoll/>
+  <ChuckQuotes/>
 </template>
 
 <script>
-import DiceRoll from './components/DiceRoll.vue'
+import ChuckQuotes from './components/ChuckQuotes.vue'
 
 export default {
   name: 'App',
   components: {
-    DiceRoll
+    ChuckQuotes
   }
 }
 </script>
