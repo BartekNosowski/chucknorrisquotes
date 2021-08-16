@@ -1,9 +1,5 @@
 html * {
-    font-family: Reckless;
-}
-
-.font-color-white {
-    color: #d7e7e3;
+    font-family: Reckless, serif;
 }
 
 body {
@@ -18,53 +14,11 @@ body {
     color: #d7e7e3;
 }
 
-.game-rules {
-    background: #1e0302;
-    font-size: 70px;
-    color: #d7e7e3;
-}
-
-.start-game {
-    font-size: 40px;
-}
-
-.text-styling {
-    font-size: 40px;
-    color: #d7e7e3;
-    text-align: center;
-}
-.text-styling-modal {
-    font-size: 40px;
-    color: #120101;
-    text-align: center;
-}
-
 .border-radius {
     border-radius: 10px;
 }
 
-.button-special-lower {
-    height: 50px;
-    width: 100px;
-    border-color: #d7e7e3;
-    border-radius: 5px;
-    color: black;
-    background: orange;
-    font-size: 30px;
-}
-
-.button-special-higher {
-    height: 50px;
-    width: 100px;
-    border-color: #d7e7e3;
-    border-radius: 5px;
-    color: black;
-    background: green;
-    font-size: 30px;
-}
-
-@media (min-width: 992px){
-    .modal-dialog {
-        max-width: 600px;
-    }
+.container-special {
+    max-height: 400px;
+    overflow-y: scroll;
 }

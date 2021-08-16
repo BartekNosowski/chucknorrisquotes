@@ -1,7 +1,6 @@
 <template>
   <div class="header">Chuck Norris Quotes</div>
-  <div class="container bg-dark border border-radius">
-    <button @click="getRandom10Quotes">10Q</button>
+  <div class="container container-special bg-dark border border-radius" @scroll="onScroll">
       <span :key="quotes.id" v-for="quotes in quotesArray" class="row m-1 px-1 text-center bg-info text-white">{{ quotes.value }}</span>
   </div>
 </template>
@@ -13,6 +12,7 @@ export default {
   data() {
     return {
       quotesArray: [],
+      scrolledToBottom: false
     }
   },
   methods: {
@@ -27,6 +27,11 @@ export default {
         this.getAQuote()
       }
     },
+    onScroll ({ target: { scrollTop, clientHeight, scrollHeight }}) {
+      if (scrollTop + clientHeight >= scrollHeight) {
+        this.getRandom10Quotes()
+      }
+    }
   },
   mounted() {
     this.getRandom10Quotes();
