@@ -1,7 +1,8 @@
 <template>
   <div class="header">Chuck Norris Quotes</div>
+  <span >Scroll down to see more quotes!</span>
   <div class="container container-special bg-dark border border-radius" @scroll="onScroll">
-      <span :key="quotes.id" v-for="quotes in quotesArray" class="row m-1 px-1 text-center bg-info text-white">{{ quotes.value }}</span>
+      <span :key="quotes.id" v-for="quotes in quotesArray" class="row m-1 px-1 text-special bg-info span-layout text-white">{{ quotes.value }}</span>
   </div>
 </template>
 <script>
@@ -12,7 +13,6 @@ export default {
   data() {
     return {
       quotesArray: [],
-      scrolledToBottom: false
     }
   },
   methods: {
@@ -36,7 +36,6 @@ export default {
   mounted() {
     this.getRandom10Quotes();
   },
-
 }
 </script>
 
