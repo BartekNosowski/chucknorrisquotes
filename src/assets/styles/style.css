@@ -19,6 +19,10 @@ body {
     }
 }
 
+.text-special {
+    font-size: 1.4em;
+}
+
 .border-radius {
     border-radius: 10px;
 }
